@@ -28,7 +28,7 @@ class RedirectRoutingTest < Test::Unit::TestCase
   
   def test_only_get_requests_are_allowed
     [:post, :put, :delete].each do |method|
-      assert_raises(ActionController::MethodNotAllowed) do
+      assert_raises(ActionController::RoutingError) do
         assert_recognizes({ :controller => "redirect_routing", :action => "redirect", :args => [{ 'controller' => "events" }] }, { :path => '/', :method => method})
       end
     end
