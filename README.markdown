@@ -15,10 +15,13 @@ GET /test, and you'll be redirected to my blog.
 
 You can also set the status to be a 301 permanent redirect instead of a temporary 302:
 
-    map.redirect 'oldurl', 'newurl', :permament => true
-    map.redirect 'oldurl', :controller => 'new_controller', :action => 'new_action', :permament => true
+    map.redirect 'oldurl', 'newurl', :permanent => true
+    map.redirect 'oldurl', :controller => 'new_controller', :action => 'new_action', :permanent => true
 
+You can also specify parameters name to the redirection:
 
+	map.redirect 'oldurl/:name', 'newurl/:name'
+	map.redirect 'search/:term/:page', 'http://google.com/search?q=:term'
 
 Motivation
 ----------
@@ -40,7 +43,7 @@ Credits
 
 Written by Lars Pind
 
-http://pinds.com
+<http://pinds.com>
 
 Changelog
 ---------
@@ -48,3 +51,4 @@ Changelog
 * Support for 301 redirects [Gioele Barabucci]
 * Silence warning about missing helper [Tim Connor]
 * Gobble up options[:conditions], so it doesn't get included in the URL redirected to [guillaumegentil]
+* Added support for redirection with params [Nando Vieira]
