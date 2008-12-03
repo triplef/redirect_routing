@@ -69,4 +69,16 @@ class RedirectRoutingTest < Test::Unit::TestCase
     assert_redirected_to "http://pinds.com"
     assert_response 301
   end
+  
+  def test_redirect_with_params
+    get :redirect, :args => ["http://google.com/search?q=:q&site=:site"], :q => 'foo', :site => 'http://foo.com'
+    assert_redirected_to "http://google.com/search?q=foo&site=http%3A%2F%2Ffoo.com"
+    assert_response 302
+  end
+  
+  def test_redirect_with_params_as_permanent
+    get :redirect, :args => ["http://google.com/search?q=:q&site=:site", { :permanent => true }], :q => 'foo bar', :site => 'http://foo.com'
+    assert_redirected_to "http://google.com/search?q=foo+bar&site=http%3A%2F%2Ffoo.com"
+    assert_response 301
+  end
 end
