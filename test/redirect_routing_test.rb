@@ -81,4 +81,22 @@ class RedirectRoutingTest < Test::Unit::TestCase
     assert_redirected_to "http://google.com/search?q=foo+bar&site=http%3A%2F%2Ffoo.com"
     assert_response 301
   end
+  
+  def test_redirect_all_query_strings_with_string
+    get :redirect, :args => ["http://foo.com/", { :query => true }], :a => 1, :b => 2
+    assert_redirected_to "http://foo.com/?a=1&b=2"
+    assert_response 302
+  end
+  
+  def test_redirect_all_query_strings_with_hash
+    get :redirect, :args => [{ :controller => "events", :query => true }], :a => 1, :b => 2
+    assert_redirected_to :controller => "events", :a => "1", :b => "2"
+    assert_response 302
+  end
+  
+  def test_redirect_all_query_strings_as_permanent
+    get :redirect, :args => ["http://foo.com/", { :query => true, :permanent => true }], :a => 1, :b => 2
+    assert_redirected_to "http://foo.com/?a=1&b=2"
+    assert_response 301
+  end
 end
