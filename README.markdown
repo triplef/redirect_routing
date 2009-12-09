@@ -10,7 +10,7 @@ This will make the root of your site redirect to the events controller, typicall
 You can redirect any URL to any set of options, or event a string URL, like this:
 
     map.redirect 'test', 'http://pinds.com'
-    
+
 GET /test, and you'll be redirected to my blog.
 
 You can also set the status to be a 301 permanent redirect instead of a temporary 302:
@@ -32,7 +32,7 @@ You can use parameters name to the redirection:
 Motivation
 ----------
 
-Why this plugin? 
+Why this plugin?
 
 Because if Rails Routing is supposed to be a Ruby replacement for mod_rewrite, then at least some redirect capability is called for.
 
@@ -43,6 +43,11 @@ But more concretely, because there's no good alternative unless you're using Apa
 * Tack the redirect onto another controller, which isn't very RESTful
 
 If you know of a simpler way to do this, please let me know.
+
+Compatibility
+-------------
+
+I recently tested this plugin on Rails 2.3.5, but it may work on older versions.
 
 Credits
 -------
