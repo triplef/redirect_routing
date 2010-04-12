@@ -36,9 +36,12 @@ class RedirectRoutingController < ActionController::Base
       if url.kind_of?(Hash)
         url.merge!(options)
       elsif !options.empty?
+        anchor = nil
+        url, anchor = $1, $2 if url =~ /^(.+)(#.+)$/
         connector = url =~ /\?/ ? '&' : '?'
         url << connector
         url << options.collect {|n,v| v.to_query(n) } * '&'
+        url << anchor if anchor
       end
 
       url
