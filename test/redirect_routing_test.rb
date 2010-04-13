@@ -99,4 +99,10 @@ class RedirectRoutingTest < ActionController::TestCase
     assert_redirected_to "http://foo.com/?a=1&b=2"
     assert_response 301
   end
+
+  def test_redirect_with_anchor
+    get :redirect, :args => ["http://foo.com/page#anchor", { :query => true }], :a => 1, :b => 2
+    assert_redirected_to "http://foo.com/page?a=1&b=2#anchor"
+    assert_response 302
+  end
 end
